@@ -70,6 +70,7 @@ class MenuController
   def view_all_entries
      @address_book.entries.each do |entry|
       system "clear"
+      puts "Address Book: #{entry.address_book.name} Entry"
       puts entry.to_s
       entry_submenu(entry)
     end
@@ -141,7 +142,7 @@ class MenuController
     case selection
       when "n"
       when "d"
-        destroy(entry)
+        delete_entry(entry)
       when "e"
         edit_entry(entry)
         entry_submenu(entry)
@@ -156,7 +157,7 @@ class MenuController
   end
 
   def delete_entry(entry)
-    address_book.entries.delete(entry)
+    @address_book.entries.destroy(entry.id)
     puts "#{entry.name} has been deleted"
   end
 
